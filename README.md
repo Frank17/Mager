@@ -65,8 +65,8 @@ sender.send(rinfo, every='3s', mail_n=5)
 from textwrap import dedent
 
 body = dedent('''\
-                 Hi! Here's an image of a cute cat: $img1, and a smaller one: $img2,
-                 Click [here](https://imgur.com/gallery/VWjRf) to learn about about him.\
+                Hi! Here's an image of a cute cat: $img1, and a smaller one: $img2,
+                Click [here](https://imgur.com/gallery/VWjRf) to learn about about them.\
               ''')
 img_url = 'https://i.imgur.com/AD3MbBi.jpeg'
 
