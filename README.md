@@ -4,7 +4,7 @@ A module aims to address rare use cases you may encounter when dealing with buil
 
 ## Examples
 
-### **Get the copy type non-recursively** (suitable for one-dimensional container)
+**Get the copy type non-recursively** (suitable for one-dimensional container)
 ```py
 from mager.copy_checker import CopyChecker, codes
 from copy import copy, deepcopy
@@ -25,7 +25,7 @@ get_copy(lst_with_immutable, copy(lst_with_immutable))              # unidentifi
 get_copy(lst_with_immutable, deepcopy(lst_with_immutable))          # unidentifiable
 ```
 
-### **Get the copy type recursively** (suitable for multi-dimensional container)
+**Get the copy type recursively** (suitable for multi-dimensional container)
 ```py
 def get_copy_recursive(iter1, iter2):
     code = CopyChecker(iter1, iter2).check_copy(recursive=True)
@@ -39,7 +39,7 @@ get_copy_recursive(lst_with_mutable, deepcopy(lst_with_mutable))    # deep
 
 ---
 
-### **Send email to specified recipients**
+**Send email to specified recipients**
 ```py
 from mager.gmail_manager import Sender, Info
 
@@ -55,12 +55,12 @@ rinfo = Info(
 sender.send(rinfo)
 ```
 
-### **Send email every 3 seconds, for a total of 5 emails**
+**Send email every 3 seconds, for a total of 5 emails**
 ```py
 sender.send(rinfo, every='3s', mail_n=5)
 ```
 
-### **Use template**
+**Use template**
 ```py
 from textwrap import dedent
 
