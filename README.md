@@ -60,7 +60,7 @@ sender.send(rinfo)
 sender.send(rinfo, every='3s', mail_n=5)
 ```
 
-**Use template**
+**Use HTML template**
 ```py
 from textwrap import dedent
 
