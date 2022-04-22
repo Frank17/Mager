@@ -49,7 +49,7 @@ get_copy_recursive(lst_with_mutable, deepcopy(lst_with_mutable))    # deep
 ```py
 from mager.gmail_manager import Sender, Info
 
-sender = Sender(<your_email>, <your_app_pwd>, close_after=3)
+sender = Sender(<your_email>, <your_app_pwd>)
 
 rinfo = Info(
     recipients=[<email_1>, <email_2>, ..., <email_n>],
