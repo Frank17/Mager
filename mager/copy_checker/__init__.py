@@ -29,7 +29,10 @@ class CopyChecker:
         self.stop_at = None
         self.has_mutable = False
 
-    def check_copy(self, recursive=False, is_first=True):
+    def check_copy(self, recursive=False):
+        return self._check_copy(recursive, True)
+
+    def _check_copy(self, recursive, is_first):
         if is_first and (self._iter1 is self._iter2):
             return 0
         elif isinstance(self._iter1, dict):
@@ -46,7 +49,7 @@ class CopyChecker:
                     return self._get_type(i, j)
                 if is_container(i):
                     self._iter1, self._iter2 = i, j
-                    return self.check_copy(True, False)
+                    return self._check_copy(True, False)
         return self._get_type(iter1, iter2)
 
     def _get_type(self, iter1, iter2):
