@@ -4,8 +4,8 @@ A module aims to address rare use cases you may encounter when dealing with buil
 
 ## Installation
 
-Mager can be installed using `pip` (no third-party dependencies needed)
-`$ python -m pip install mager`
+Mager can be installed using `pip` (no third-party dependencies needed): 
+- `$ python -m pip install mager`
 
 
 ## Examples
