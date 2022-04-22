@@ -10,20 +10,21 @@ classifiers = [
 ]
 
 
-with open('README.txt') as f:
-    readme = f.read()
+with open('README.txt') as readme, open('requirements.txt') as requirements:
+    README = readme.read()
+    REQUIREMENTS = requirements.read().splitlines()
 
 setup(
   name='mager',
-  version='0.0.1',
-  description='Built-in data structure assistant',
-  long_description=readme,
-  url='',
+  version='0.0.267',
+  description='Assistant for tricky tasks',
+  long_description=README,
+  url='https://github.com/Frank17/Mager',
   author='Frank Zhang',
   author_email='frankzhang314159@gmail.com',
   license='MIT',
   classifiers=classifiers,
   keywords=['assistant', 'helper'],
   packages=find_packages(),
-  install_requires=['']
+  install_requires=REQUIREMENTS
 )
