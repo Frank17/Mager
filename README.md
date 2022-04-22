@@ -71,7 +71,7 @@ body = dedent('''\
 img_url = 'https://i.imgur.com/AD3MbBi.jpeg'
 
 rinfo = Info(
-    recipients='frankzhang314159@gmail.com',
+    recipients=[<email_1>, <email_2>, ..., <email_n>],
     name='Tester',
     subject='This is a test email',
     body=body,
