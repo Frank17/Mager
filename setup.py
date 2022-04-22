@@ -16,7 +16,7 @@ with open('README.txt') as readme, open('requirements.txt') as requirements:
 
 setup(
   name='mager',
-  version='0.0.267',
+  version='0.0.268',
   description='Assistant for tricky tasks',
   long_description=README,
   url='https://github.com/Frank17/Mager',
