@@ -1,5 +1,5 @@
 # Mager
-A package aims to address and simplify the rare use cases you may encounter in developing web applications and programming in general
+A package aims to address and simplify the rare use cases you may encounter in programming in general
 
 
 ## Installation
