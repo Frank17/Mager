@@ -1,5 +1,5 @@
 # Mager
-A package aims to address rare use cases you may encounter when dealing with built-in data types and structures
+A package aims to address and simplify the rare use cases you may encounter in developing web applications and programming in general
 
 
 ## Installation
