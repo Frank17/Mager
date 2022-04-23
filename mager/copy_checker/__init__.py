@@ -22,7 +22,7 @@ def get_type(i, j):
 
 class CopyChecker:
     """
-    Determines the copy between two built-in iterables via mutual recursion
+    Determines the copy type between two built-in iterables via mutual recursion
     """
     def __init__(self, iter1, iter2):
         assert iter1 == iter2, 'Two iterables should have the same value'
