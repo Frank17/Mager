@@ -25,7 +25,7 @@ class CopyChecker:
     Determines the copy type between two built-in iterables via mutual recursion
     """
     def __init__(self, iter1, iter2):
-        assert iter1 == iter2, 'Two iterables should have the same value'
+        assert iter1 == iter2, 'Given iterables should have the same value'
         self._iter1 = iter1
         self._iter2 = iter2
         self.iter = iter1
