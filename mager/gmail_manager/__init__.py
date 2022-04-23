@@ -11,7 +11,7 @@ from textwrap import dedent
 from sched import scheduler
 from time import time, sleep
 from dataclasses import dataclass, field
-from typing import Tuple, Union
+from typing import Tuple, List, Union, Optional
 from .errors import InvalidPathError
 
 IMG_URL_PATTERN = compile(r'https?://.*\.(?:jpg|jpeg|png|tiff|bmp|svg|gif|webp|raw)')
@@ -84,7 +84,7 @@ class Sender:
         self._s = scheduler(time, sleep)
         self._cache = {}
 
-    def send(self, info, every=None, mail_n=3):
+    def send(self, info: Info, every: Optional[str] = None, mail_n: int = 3) -> None:
         if msg := self._cache.get(info):
             self._counter += 1
             return self._send_mail(msg, every, mail_n)
@@ -126,7 +126,7 @@ class Sender:
         self._counter += 1
         self._send_mail(msg, every, mail_n)
 
-    def _get_template(self, template, imgs, img_nums):
+    def _get_template(self, template: str, imgs: Tuple[str], img_nums: List[int]) -> Template:
         img_maps = {}
         for img_n in img_nums:
             img = imgs[img_n - 1]
@@ -148,7 +148,7 @@ class Sender:
 
         return template.substitute(img_maps)
 
-    def _send_mail(self, msg, every, mail_n):
+    def _send_mail(self, msg: EmailMessage, every: Union[str, None], mail_n: int) -> None:
         if not every:
             self.conn.send_message(msg)
         else:
