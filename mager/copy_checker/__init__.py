@@ -65,4 +65,5 @@ class CopyChecker:
             if is_mutable(i):
                 self.stop_at = i
                 return get_type(i, j)
+            
         return 3
