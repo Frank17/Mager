@@ -77,7 +77,7 @@ class Sender:
         self._img_files = {}
         self._counter = 0
         self.limit = close_after
-        self.conn = smtplib.SMTP("smtp.gmail.com", 587)
+        self.conn = smtplib.SMTP('smtp.gmail.com', 587)
         self.conn.ehlo()
         self.conn.starttls()
         self.conn.login(sender, app_pwd)
