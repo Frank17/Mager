@@ -45,7 +45,7 @@ get_copy_recursive(lst_with_mutable, deepcopy(lst_with_mutable))    # deep
 
 ---
 
-**Send email to specified recipients**
+**Send an email to specified recipients**
 ```py
 from mager.gmail_manager import Sender, Info
 
@@ -61,7 +61,7 @@ rinfo = Info(
 sender.send(rinfo)
 ```
 
-**Send email every 3 seconds, for a total of 5 emails**
+**Send an email every 3 seconds, for a total of 5 emails**
 ```py
 sender.send(rinfo, every='3s', mail_n=5)
 ```
