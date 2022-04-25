@@ -1,5 +1,5 @@
 # Mager
-A package aims to address and simplify the rare cases you may encounter in Python-specific programming details
+A package aims to address and simplify the rare cases you may encounter (i.e. problems not properly asked/answered on StackOverflow)
 
 
 ## Installation
