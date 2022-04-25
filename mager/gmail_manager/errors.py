@@ -1,6 +1,6 @@
 class InvalidPathError(Exception):
     def __init__(self, path):
-        self.message = f'{path} is not a valid URL to an image source nor an existing '
+        self.message = f'{path} is not a valid URL to an image source nor an existing ' \
                         'path to an image file'
         super().__init__(self.message)
 
