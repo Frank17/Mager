@@ -1,3 +1,4 @@
+import re
 import smtplib
 import mimetypes
 from email.utils import formataddr
@@ -5,16 +6,15 @@ from email.message import EmailMessage
 from string import Template
 from os.path import exists
 from pathlib import Path
-from re import compile, findall
 from string import digits
 from textwrap import dedent
 from sched import scheduler
 from time import time, sleep
 from dataclasses import dataclass, field
 from typing import Tuple, List, Union, Optional
-from .errors import InvalidPathError
+from .errors import InvalidPathError, UnmatchedImageNumberError
 
-IMG_URL_PATTERN = compile(r'https?://.*\.(?:jpg|jpeg|png|tiff|bmp|svg|gif|webp|raw)')
+IMG_URL_PATTERN = re.compile(r'https?://.*\.(?:jpg|jpeg|png|tiff|bmp|svg|gif|webp|raw)')
 
 
 def split_num_text(s):
@@ -90,7 +90,7 @@ class Sender:
             return self._send_mail(msg, every, mail_n)
 
         body = info.body
-        for string, link in findall(r'\[(.+?)]\((.+?)\)', body):
+        for string, link in re.findall(r'\[(.+?)]\((.+?)\)', body):
             text = f'[{string}]({link})'
             path = f'<a href="{link}" target="_blank">{string}</a>'
             body = body.replace(text, path)
@@ -103,8 +103,10 @@ class Sender:
         msg.set_content(info.body)
 
         imgs = info.images
-        img_nums = [int(i) for i in findall(r'\$img(\d)', body)]
-        assert len(img_nums) == len(imgs) or len(set(img_nums)) == len(imgs), 'Unmatch image number'
+        img_nums = [int(i) for i in re.findall(r'\$img(\d)', body)]
+        
+        if not (len(img_nums) == len(imgs) and len(set(img_nums)) == len(imgs)):
+            raise UnmatchedImageNumberError(img_nums, len(imgs))
 
         template = Template(dedent(f'''\
                     <html>
