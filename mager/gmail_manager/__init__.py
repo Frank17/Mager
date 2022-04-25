@@ -71,7 +71,7 @@ class Sender:
     """Gmail sender class"""
     mimetypes.add_type('text/markdown', '.md')
 
-    def __init__(self, sender: str, app_pwd: str, close_after: int = None):
+    def __init__(self, sender: str, app_pwd: str, close_after: Optional[int] = None):
         self.sender = sender
         self.app_pwd = app_pwd
         self.limit = close_after
