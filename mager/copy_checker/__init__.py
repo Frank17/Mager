@@ -1,4 +1,5 @@
 from collections.abc import MutableSequence, MutableSet, MutableMapping, Container
+from .errors import WrongValuesError
 
 codes = {
     0: 'same ref',
@@ -25,7 +26,8 @@ class CopyChecker:
     Determines the copy type of two built-in iterables via mutual recursion
     """
     def __init__(self, iter1, iter2):
-        assert iter1 == iter2, 'Given iterables should have the same value'
+        if iter1 != iter2:
+            raise WrongValuesError('Given iterables should have the same value')
         self._iter1 = iter1
         self._iter2 = iter2
         self.iter = iter1
