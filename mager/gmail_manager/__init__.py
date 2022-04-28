@@ -38,7 +38,7 @@ def parse_attr(size_attrs):
 
 def make_tuple(content):
     return content if isinstance(content, tuple) else tuple(content) \
-        if isinstance(content, list) else (content,)
+        if isinstance(content, (list, set)) else (content,)
 
 
 def _get_attachments(attrs):
