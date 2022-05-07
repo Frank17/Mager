@@ -105,7 +105,7 @@ class Sender:
         imgs = info.images
         img_nums = [int(i) for i in re.findall(r'\$img(\d)', body)]
         
-        if not (len(img_nums) == len(imgs) and len(set(img_nums)) == len(imgs)):
+        if len(img_nums) != len(imgs) and len(set(img_nums)) != len(imgs):
             raise UnmatchedImageNumberError(len(img_nums), len(imgs))
 
         template = Template(dedent(f'''\
