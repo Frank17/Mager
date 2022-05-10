@@ -1,4 +1,5 @@
 from collections.abc import MutableSequence, MutableSet, MutableMapping, Container
+from functools import cache
 from .errors import WrongValuesError
 
 codes = {
@@ -44,7 +45,8 @@ class CopyChecker:
             return self._recursive(self._iter1.values(),
                                    self._iter2.values(), recursive)
         return self._recursive(self._iter1, self._iter2, recursive)
-
+    
+    @cache
     def _recursive(self, iter1, iter2, recursive):
         if recursive:
             for i, j in zip(iter1, iter2):
