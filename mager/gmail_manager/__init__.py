@@ -83,7 +83,13 @@ class Sender:
         self._counter = 0
         self._s = scheduler(time, sleep)
         self._cache = {}
-
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+    
     def send(self, info: Info, every: Optional[str] = None, mail_n: int = 3) -> None:
         if msg := self._cache.get(info):
             self._counter += 1
