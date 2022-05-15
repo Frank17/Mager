@@ -86,3 +86,8 @@ rinfo = Info(
 
 sender.send(rinfo)
 ```
+
+---
+
+## Next step
+- Add support to embedded videos
