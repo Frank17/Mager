@@ -7,6 +7,7 @@ from string import Template
 from os.path import exists
 from pathlib import Path
 from string import digits
+from urllib.request import urlopen
 from textwrap import dedent
 from sched import scheduler
 from time import time, sleep
@@ -15,6 +16,10 @@ from typing import Tuple, List, Union, Optional
 from .errors import InvalidPathError, UnmatchedImageNumberError
 
 IMG_URL_PATTERN = re.compile(r'https?://.*\.(?:jpg|jpeg|png|tiff|bmp|svg|gif|webp|raw)')
+
+
+def is_img(url):
+    return IMG_URL_PATTERN.match(url)
 
 
 def split_num_text(s):
@@ -43,10 +48,16 @@ def make_tuple(content):
 
 def _get_attachments(attrs):
     for path in attrs:
-        p = Path(path)
-        mtype = mimetypes.guess_type(path)[0]
+        if is_img(path):
+            r = urlopen(path)
+            mtype = r.getheader('Content-Type')
+            content = r.read()
+        else:
+            p = Path(path)
+            mtype = mimetypes.guess_type(path)[0]
+            content = p.read() if mtype == 'text' else p.read_bytes()
+            
         stype = mtype.split('/')[1]
-        content = p.read() if mtype == 'text' else p.read_bytes()
         yield content, mtype, stype, path
 
 
@@ -149,7 +160,7 @@ class Sender:
                 img_cid, img_ext, img_con = f'<img{img_n}>', p.suffix[1:], p.read_bytes()
                 self._img_files[img_cid] = (path, img_ext, img_con)
                 img_maps[f'img{img_n}'] = f'<img src="cid:img{img_n}" {dims}/>'
-            elif IMG_URL_PATTERN.match(path):
+            elif is_img(path):
                 img_maps[f'img{img_n}'] = f'<img src="{path}" {dims}/>'
             else:
                 raise InvalidPathError(path)
