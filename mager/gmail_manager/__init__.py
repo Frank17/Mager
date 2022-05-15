@@ -8,12 +8,13 @@ from os.path import exists
 from pathlib import Path
 from string import digits
 from urllib.request import urlopen
+from urllib.parse import urlparse
 from textwrap import dedent
 from sched import scheduler
 from time import time, sleep
 from dataclasses import dataclass, field
 from typing import Tuple, List, Union, Optional
-from .errors import InvalidPathError, UnmatchedImageNumberError
+from errors import InvalidPathError, UnmatchedImageNumberError
 
 IMG_URL_PATTERN = re.compile(r'https?://.*\.(?:jpg|jpeg|png|tiff|bmp|svg|gif|webp|raw)')
 
@@ -52,11 +53,12 @@ def _get_attachments(attrs):
             r = urlopen(path)
             mtype = r.getheader('Content-Type')
             content = r.read()
+            path = urlparse(path).path[1:]
         else:
             p = Path(path)
             mtype = mimetypes.guess_type(path)[0]
             content = p.read() if mtype == 'text' else p.read_bytes()
-            
+
         stype = mtype.split('/')[1]
         yield content, mtype, stype, path
 
@@ -94,13 +96,13 @@ class Sender:
         self._counter = 0
         self._s = scheduler(time, sleep)
         self._cache = {}
-    
+
     def __enter__(self):
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
-    
+
     def send(self, info: Info, every: Optional[str] = None, mail_n: int = 3) -> None:
         if msg := self._cache.get(info):
             self._counter += 1
@@ -121,7 +123,7 @@ class Sender:
 
         imgs = info.images
         img_nums = [int(i) for i in re.findall(r'\$img(\d)', body)]
-        
+
         if len(img_nums) != len(imgs) and len(set(img_nums)) != len(imgs):
             raise UnmatchedImageNumberError(len(img_nums), len(imgs))
 
@@ -145,7 +147,7 @@ class Sender:
         self._counter += 1
         self._send_mail(msg, every, mail_n)
 
-    def _get_template(self, template: str, imgs: Tuple[str], img_nums: List[int]) -> Template:
+    def _get_template(self, template: Template, imgs: Tuple[str], img_nums: List[int]) -> str:
         img_maps = {}
         for img_n in img_nums:
             img = imgs[img_n - 1]
