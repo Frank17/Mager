@@ -90,4 +90,4 @@ sender.send(rinfo)
 ---
 
 ## Next step
-- Add support to embedded videos
+- Add support to embedded videos and table
