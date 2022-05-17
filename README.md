@@ -90,4 +90,5 @@ sender.send(rinfo)
 ---
 
 ## Next step
-- Add support to embedded videos and table
+- Fix a minor bug in `CopyChecker` subpackage
+- Add a new subpackage that supports HTML tables
