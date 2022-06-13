@@ -1,5 +1,6 @@
 import re
 import mimetypes
+from dataclasses import dataclass, field
 
 import smtplib
 from email.utils import formataddr
@@ -16,7 +17,6 @@ from textwrap import dedent
 
 from time import time, sleep
 from sched import scheduler
-from dataclasses import dataclass, field
 
 from typing import Tuple, List, Union, Optional
 from errors import InvalidPathError, UnmatchedImageNumberError
