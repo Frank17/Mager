@@ -1,18 +1,23 @@
 import re
-import smtplib
 import mimetypes
+
+import smtplib
 from email.utils import formataddr
 from email.message import EmailMessage
-from string import Template
-from os.path import exists
-from pathlib import Path
-from string import digits
+
 from urllib.request import urlopen
 from urllib.parse import urlparse
+from os.path import exists
+from pathlib import Path
+
+from string import Template, digits
 from textwrap import dedent
-from sched import scheduler
+from textwrap import dedent
+
 from time import time, sleep
+from sched import scheduler
 from dataclasses import dataclass, field
+
 from typing import Tuple, List, Union, Optional
 from errors import InvalidPathError, UnmatchedImageNumberError
 
