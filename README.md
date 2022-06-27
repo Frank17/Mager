@@ -72,7 +72,7 @@ from textwrap import dedent
 
 body = dedent('''\
                 Hi! Here's an image of a cute cat: $img1, and a smaller one: $img2,
-                Click [here](https://imgur.com/gallery/VWjRf) to learn about about them.\
+                Click [here](https://imgur.com/gallery/VWjRf) to learn more about them.\
               ''')
 img_url = 'https://i.imgur.com/AD3MbBi.jpeg'
 
