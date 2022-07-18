@@ -54,11 +54,11 @@ class CopyChecker:
                     self.has_mutable = True
                     self.stop_at = i
                     return self._get_type(i, j)
-                
+
                 if is_container(i):
                     self._iter1, self._iter2 = i, j
                     return self._check_copy(True, False)
-                
+
         return self._get_type(iter1, iter2)
 
     def _get_type(self, iter1, iter2):
