@@ -1,5 +1,5 @@
 # Mager
-A package aims to address and simplify the rare cases you may encounter (i.e. problems not properly asked/answered on StackOverflow)
+A package aiming to address and simplify the rare cases you may encounter (i.e. problems not properly asked/answered on StackOverflow)
 
 
 ## Installation
@@ -10,7 +10,7 @@ Mager can be installed using `pip` (no third-party dependencies needed):
 
 ## Examples
 
-**Get the copy type non-recursively** (suitable for one-dimensional containers)
+**Get the copy type non-recursively** (works well for one-dimensional containers)
 ```py
 from mager.copy_checker import CopyChecker, codes
 from copy import copy, deepcopy
@@ -31,7 +31,7 @@ get_copy(lst_with_immutable, copy(lst_with_immutable))              # unidentifi
 get_copy(lst_with_immutable, deepcopy(lst_with_immutable))          # unidentifiable
 ```
 
-**Get the copy type recursively** (suitable for nested containers)
+**Get the copy type recursively** (works well for nested containers)
 ```py
 def get_copy_recursive(iter1, iter2):
     code = CopyChecker(iter1, iter2).check_copy(recursive=True)
