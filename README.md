@@ -5,7 +5,7 @@ A package aims to address and simplify the rare cases you may encounter (i.e. pr
 ## Installation
 
 Mager can be installed using `pip` (no third-party dependencies needed): 
-- `$ python -m pip install mager`
+- `$ python3 -m pip install mager`
 
 
 ## Examples
