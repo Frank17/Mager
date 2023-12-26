@@ -1,5 +1,5 @@
 # Mager
-A package aiming to address and simplify the rare cases you may encounter (i.e. problems not properly asked/answered on StackOverflow)
+A package aiming to automate the email-sending process and counter Python-related introspection issues.
 
 
 ## Installation
@@ -10,7 +10,51 @@ Mager can be installed using `pip` (no third-party dependencies needed):
 
 ## Examples
 
-**Get the copy type non-recursively** (works well for one-dimensional containers)
+**Send an email to specified recipients**
+```py
+from mager.gmail_manager import Sender, Info
+
+sender = Sender(<your_email>, <your_app_pwd>)
+
+rinfo = Info(
+    recipients=[<email_1>, <email_2>, ..., <email_n>],
+    name='Tester',
+    subject='This is a test email',
+    body='This is the email body.',
+)
+
+sender.send(rinfo)
+```
+
+**Send an email every 3 seconds, for a total of 5 emails**
+```py
+sender.send(rinfo, every='3s', mail_n=5)
+```
+
+**Use a custom template**
+```py
+from textwrap import dedent
+
+body = dedent('''\
+                Hi! Here's an image of a cute cat: $img1, and a smaller one: $img2,
+                Click [here](https://imgur.com/gallery/VWjRf) to learn more about them.\
+              ''')
+img_url = 'https://i.imgur.com/AD3MbBi.jpeg'
+
+rinfo = Info(
+    recipients=[<email_1>, <email_2>, ..., <email_n>],
+    name='Tester',
+    subject='This is a test email',
+    body=body,
+    images=[img_url, (img_url, 'h150')]
+)
+
+sender.send(rinfo)
+```
+
+---
+
+**Get the copy type** (works well for one-dimensional containers)
 ```py
 from mager.copy_checker import CopyChecker, codes
 from copy import copy, deepcopy
@@ -42,51 +86,6 @@ lst_with_mutable = [1, 2, (3, (4, [5]))]
 get_copy_recursive(lst_with_mutable, copy(lst_with_mutable))        # shallow
 get_copy_recursive(lst_with_mutable, deepcopy(lst_with_mutable))    # deep
 ```
-
----
-
-**Send an email to specified recipients**
-```py
-from mager.gmail_manager import Sender, Info
-
-sender = Sender(<your_email>, <your_app_pwd>)
-
-rinfo = Info(
-    recipients=[<email_1>, <email_2>, ..., <email_n>],
-    name='Tester',
-    subject='This is a test email',
-    body='This is the email body.',
-)
-
-sender.send(rinfo)
-```
-
-**Send an email every 3 seconds, for a total of 5 emails**
-```py
-sender.send(rinfo, every='3s', mail_n=5)
-```
-
-**Use custom template**
-```py
-from textwrap import dedent
-
-body = dedent('''\
-                Hi! Here's an image of a cute cat: $img1, and a smaller one: $img2,
-                Click [here](https://imgur.com/gallery/VWjRf) to learn more about them.\
-              ''')
-img_url = 'https://i.imgur.com/AD3MbBi.jpeg'
-
-rinfo = Info(
-    recipients=[<email_1>, <email_2>, ..., <email_n>],
-    name='Tester',
-    subject='This is a test email',
-    body=body,
-    images=[img_url, (img_url, 'h150')]
-)
-
-sender.send(rinfo)
-```
-
 ---
 
 ## Next step
